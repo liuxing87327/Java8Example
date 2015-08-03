@@ -281,3 +281,6 @@ http://ifeve.com/java-8-features-tutorial/
 
 Java 8学习资料汇总
 http://ifeve.com/java8-learning-resources/
+
+Stream语法详解
+http://ifeve.com/stream/
