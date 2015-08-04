@@ -1,6 +1,6 @@
 #JAVA8实用范例
 
-*写出更简洁优美的代码*
+*抛砖引玉！写出更简洁优美的代码*
 
 ##简介
 - 自java5以来最大的版本变动
@@ -294,15 +294,23 @@ http://ifeve.com/java-se-8-concurrent-tool-enhance/
 
 ##参考资料
 Java8特性
+
 http://ifeve.com/java-8-features-tutorial/
 
 Java 8学习资料汇总
+
 http://ifeve.com/java8-learning-resources/
 
 Stream语法详解
+
 http://ifeve.com/stream/
+
+Java Stream API示例教程（推荐）
+
+http://www.journaldev.com/2774/java-8-stream-api-example-tutorial
 
 http://winterbe.com/posts/2014/07/31/java8-stream-tutorial-examples/
 
 reduction
+
 http://docs.oracle.com/javase/tutorial/collections/streams/reduction.html
