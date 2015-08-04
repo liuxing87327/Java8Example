@@ -172,11 +172,23 @@ System.out.println(JSON.toJSONString(filteredPersons));
 
 或者对结果分组
 ```java
-List<Person> persons = Lists.newArrayList(new Person("张三", 20), new Person("赵六", 20), new Person("李四", 22), new Person("王五", 18));
+List<Person> persons = Lists.newArrayList(new Person("张三", 20, "男"), new Person("赵六", 20, "男"), new Person("李四", 22, "男"), new Person("王五", 18, "女"));
 
 // 按照年龄分组
-Map<Integer, List<Person>> map = persons.stream().collect(Collectors.groupingBy(Person::getAge));
-System.out.println(JSON.toJSONString(map));
+Map<Integer, List<Person>> groupMap = persons.stream().collect(Collectors.groupingBy(Person::getAge));
+System.out.println(JSON.toJSONString(groupMap));
+
+// 按年龄统计名字
+Map<Integer, List<String>> groupName = persons.stream().collect(Collectors.groupingBy(Person::getAge, Collectors.mapping(Person::getName, Collectors.toList())));
+System.out.println(JSON.toJSONString(groupName));
+
+// 按性别求年龄总和
+Map<String, Integer> groupAgeCount = persons.stream().collect(Collectors.groupingBy(Person::getSex, Collectors.reducing(0, Person::getAge, Integer::sum)));
+System.out.println(JSON.toJSONString(groupAgeCount));
+
+// 统计各年龄的数量
+Map<Integer, Integer> groupCount = persons.stream().collect(Collectors.groupingBy(Person::getAge, Collectors.summingInt(p -> 1)));
+System.out.println(JSON.toJSONString(groupCount));
 ```
 
 ####Find
@@ -217,6 +229,10 @@ persons.parallelStream().forEach(System.out::print);
 调用百度地图API，给一些带地址的数据查询坐标，节省70%的时间
 
 更多场景请结合业务组合使用
+
+API操作流程如下
+
+![Java8 Stream API 流程](http://static.oschina.net/uploads/space/2014/0522/142224_Ho8k_1028150.png)
 
 ---
 ##Base64
@@ -286,3 +302,6 @@ Stream语法详解
 http://ifeve.com/stream/
 
 http://winterbe.com/posts/2014/07/31/java8-stream-tutorial-examples/
+
+reduction
+http://docs.oracle.com/javase/tutorial/collections/streams/reduction.html

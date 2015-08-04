@@ -16,18 +16,27 @@ import java.util.stream.Collectors;
  */
 public class StreamTest {
 
+    /**
+     * 测试顺序流
+     */
     @Test
     public void testStream() {
         List<Person> persons = Lists.newArrayList(new Person("张三"), new Person("李四"));
         persons.stream().forEach(System.out::print);
     }
 
+    /**
+     * 测试并行流
+     */
     @Test
     public void testParallelStream() {
         List<Person> persons = Lists.newArrayList(new Person("张三"), new Person("李四"));
         persons.parallelStream().forEach(System.out::print);
     }
 
+    /**
+     * 测试筛选
+     */
     @Test
     public void testFilter() {
         List<Person> persons = Lists.newArrayList(new Person("张三", 20), new Person("赵六", 20), new Person("李四", 22), new Person("王五", 18));
@@ -45,6 +54,9 @@ public class StreamTest {
         System.out.println(JSON.toJSONString(filteredPersonSet));
     }
 
+    /**
+     * 测试查找
+     */
     @Test
     public void testFind() {
         List<Person> persons = Lists.newArrayList(new Person("张三", 20), new Person("赵六", 20), new Person("李四", 22), new Person("王五", 18));
@@ -56,6 +68,9 @@ public class StreamTest {
         }
     }
 
+    /**
+     * 测试提取
+     */
     @Test
     public void testMap() {
         List<Person> persons = Lists.newArrayList(new Person("张三", 20), new Person("赵六", 20), new Person("李四", 22), new Person("王五", 18));
@@ -65,6 +80,9 @@ public class StreamTest {
         System.out.println(JSON.toJSONString(names));
     }
 
+    /**
+     * 测试统计
+     */
     @Test
     public void testCount() {
         List<Person> persons = Lists.newArrayList(new Person("张三", 20), new Person("赵六", 20), new Person("李四", 22), new Person("王五", 18));
@@ -74,13 +92,28 @@ public class StreamTest {
         System.out.println(count);
     }
 
+    /**
+     * 测试分组
+     */
     @Test
     public void testGroup() {
-        List<Person> persons = Lists.newArrayList(new Person("张三", 20), new Person("赵六", 20), new Person("李四", 22), new Person("王五", 18));
+        List<Person> persons = Lists.newArrayList(new Person("张三", 20, "男"), new Person("赵六", 20, "男"), new Person("李四", 22, "男"), new Person("王五", 18, "女"));
 
         // 按照年龄分组
-        Map<Integer, List<Person>> map = persons.stream().collect(Collectors.groupingBy(Person::getAge));
-        System.out.println(JSON.toJSONString(map));
+        Map<Integer, List<Person>> groupMap = persons.stream().collect(Collectors.groupingBy(Person::getAge));
+        System.out.println(JSON.toJSONString(groupMap));
+
+        // 按年龄统计名字
+        Map<Integer, List<String>> groupName = persons.stream().collect(Collectors.groupingBy(Person::getAge, Collectors.mapping(Person::getName, Collectors.toList())));
+        System.out.println(JSON.toJSONString(groupName));
+
+        // 按性别求年龄总和
+        Map<String, Integer> groupAgeCount = persons.stream().collect(Collectors.groupingBy(Person::getSex, Collectors.reducing(0, Person::getAge, Integer::sum)));
+        System.out.println(JSON.toJSONString(groupAgeCount));
+
+        // 统计各年龄的数量
+        Map<Integer, Integer> groupCount = persons.stream().collect(Collectors.groupingBy(Person::getAge, Collectors.summingInt(p -> 1)));
+        System.out.println(JSON.toJSONString(groupCount));
     }
 
 }

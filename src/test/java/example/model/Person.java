@@ -39,6 +39,12 @@ public class Person {
         this.age = age;
     }
 
+    public Person(@Nonnull String name, int age, String sex) {
+        this.name = name;
+        this.age = age;
+        this.sex = sex;
+    }
+
     public String getName() {
         return name;
     }
