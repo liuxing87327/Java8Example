@@ -205,13 +205,13 @@ if (optional.isPresent()) {
 
 ###顺序流与并行流
 每个Stream都有两种模式：顺序执行和并行执行。
-顺序流
+**顺序流**
 ```java
 List<Person> persons = Lists.newArrayList(new Person("张三"), new Person("李四"));
 persons.stream().forEach(System.out::print);
 ```
 
-并行流
+**并行流**
 ```java
 List<Person> persons = Lists.newArrayList(new Person("张三"), new Person("李四"));
 persons.parallelStream().forEach(System.out::print);
@@ -220,17 +220,18 @@ persons.parallelStream().forEach(System.out::print);
 
 以前我们需要自己实现并行，现在使用java8就是so easy了！
 
-注意点：
+**注意点：**
 小数据量时候没必要使用并行流，比如几条数据。
 建议在数据库批量操作、HTTP批量请求API时候使用并行操作。
 
-案例：
+**案例：**
 并行修改300w数据，把数据库拖到高负载了- -!
 调用百度地图API，给一些带地址的数据查询坐标，节省70%的时间
 
 更多场景请结合业务组合使用
 
-API操作流程如下
+
+**API操作流程如下**
 
 ![Java8 Stream API 流程](images/java8-stream.png)
 
