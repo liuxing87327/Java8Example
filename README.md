@@ -232,7 +232,7 @@ persons.parallelStream().forEach(System.out::print);
 
 API操作流程如下
 
-![Java8 Stream API 流程](http://static.oschina.net/uploads/space/2014/0522/142224_Ho8k_1028150.png)
+![Java8 Stream API 流程](images/java8-stream.png)
 
 ---
 ##Base64
