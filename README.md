@@ -284,3 +284,5 @@ http://ifeve.com/java8-learning-resources/
 
 Stream语法详解
 http://ifeve.com/stream/
+
+http://winterbe.com/posts/2014/07/31/java8-stream-tutorial-examples/
