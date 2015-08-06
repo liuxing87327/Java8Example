@@ -203,6 +203,40 @@ if (optional.isPresent()) {
 }
 ```
 
+需要注意，stream的操作都是管道特性，通过一个例子可以看出
+```java
+List<Person> persons = Lists.newArrayList(new Person("张三", 20, "男"), new Person("赵六", 20, "男"), new Person("李四", 22, "男"), new Person("王五", 18, "女"));
+
+persons.stream()
+        .filter(p -> {
+            System.out.println("filter=>" + p);
+            return true;
+        })
+        .map(p -> {
+            System.out.println("map=>" + p.getName());
+            return p.getName();
+        })
+        .forEach(p -> System.out.println("结果=>" + p));
+```
+
+结果如下：
+```bash
+filter=>example.model.Person@3a4afd8d
+map=>张三
+结果=>张三
+filter=>example.model.Person@1996cd68
+map=>赵六
+结果=>赵六
+filter=>example.model.Person@3339ad8e
+map=>李四
+结果=>李四
+filter=>example.model.Person@555590
+map=>王五
+结果=>王五
+```
+
+更多参考：http://colobu.com/2014/11/18/Java-8-Stream/
+
 ###顺序流与并行流
 每个Stream都有两种模式：顺序执行和并行执行。
 **顺序流**

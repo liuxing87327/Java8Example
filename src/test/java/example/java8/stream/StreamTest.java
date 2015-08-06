@@ -116,4 +116,23 @@ public class StreamTest {
         System.out.println(JSON.toJSONString(groupCount));
     }
 
+    /**
+     * 测试管道特性
+     */
+    @Test
+    public void testPipelining() {
+        List<Person> persons = Lists.newArrayList(new Person("张三", 20, "男"), new Person("赵六", 20, "男"), new Person("李四", 22, "男"), new Person("王五", 18, "女"));
+
+        persons.stream()
+                .filter(p -> {
+                    System.out.println("filter=>" + p);
+                    return true;
+                })
+                .map(p -> {
+                    System.out.println("map=>" + p.getName());
+                    return p.getName();
+                })
+                .forEach(p -> System.out.println("结果=>" + p));
+    }
+
 }

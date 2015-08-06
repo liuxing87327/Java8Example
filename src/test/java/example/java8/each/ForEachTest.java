@@ -9,6 +9,7 @@ import org.junit.Test;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Consumer;
 
 /**
  * EachTest
@@ -30,6 +31,16 @@ public class ForEachTest {
 
         // 新的方式
         persons.forEach(person -> System.out.println(person.getName()));
+        persons.forEach(person -> {
+            System.out.println(person.getName());
+        });
+
+        persons.forEach(new Consumer<Person>() {
+            @Override
+            public void accept(Person person) {
+                System.out.println(person.getName());
+            }
+        });
     }
 
     @Test
