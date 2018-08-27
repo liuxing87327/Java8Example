@@ -1,8 +1,8 @@
-#JAVA8实用范例
+# JAVA8实用范例
 
 *抛砖引玉！写出更简洁优美的代码*
 
-##简介
+## 简介
 - 自java5以来最大的版本变动
 - 很大程度增强java类库
 - 主要目标
@@ -11,7 +11,7 @@
     - 更好的利用多核和多处理器系统
 
 
-##Lambda表达式
+## Lambda表达式
 - 函数式接口:只包含一个方法的接口
 - 语法：`(参数) -> 表达式` 或者 `(参数) -> { 语句; }`
 - 方法引用
@@ -54,7 +54,7 @@ Radio radio2 = () -> System.out.println("播放广播");
 在Stream API中会有大量使用
 
 ---
-##List、Map的新的迭代API
+## List、Map的新的迭代API
 List
 ```java
 // 模拟数据
@@ -112,15 +112,15 @@ default void forEach(Consumer<? super T> action) {
 感兴趣的可以打开源码，看看java.util.function包下面的这些函数接口，在很多地方都有使用。
 
 ---
-##Stream API
+## Stream API
 流（Stream）仅仅代表着数据流，并没有数据结构，所以他遍历完一次之后便再也无法遍历（这点在编程时候需要注意，不像Collection，遍历多少次里面都还有数据），它的来源可以是Collection、array、io等等。
 
-###中间与终点方法
+### 中间与终点方法
 流作用是提供了一种操作大数据接口，让数据操作更容易和更快。它具有过滤、映射以及减少遍历数等方法，这些方法分两种：中间方法和终端方法，“流”抽象天生就该是持续的，中间方法永远返回的是Stream，因此如果我们要获取最终结果的话，必须使用终点操作才能收集流产生的最终结果。区分这两个方法是看他的返回值，如果是Stream则是中间方法，否则是终点方法。有点类似sql语句的语义，自行脑补，哈哈。
 
 以下列举几个常用的方法，更多使用方法请自行查阅API文档
 
-####Filter
+#### Filter
 从集合总过滤数据
 ```java
 List<Person> persons = Lists.newArrayList(new Person("张三", 20), new Person("赵六", 20), new Person("李四", 22), new Person("王五", 18));
@@ -134,7 +134,7 @@ Set<Person> filteredPersonSet = persons.stream().filter(person -> person.getAge(
 System.out.println(JSON.toJSONString(filteredPersonSet));
 ```
 
-####Map
+#### Map
 用来转换对象，比如把集合里面的某些属性组合成一个集合
 ```java
 List<Person> persons = Lists.newArrayList(new Person("张三", 20), new Person("赵六", 20), new Person("李四", 22), new Person("王五", 18));
@@ -142,7 +142,7 @@ List<Person> persons = Lists.newArrayList(new Person("张三", 20), new Person("
 List<String> names = persons.stream().map(Person::getName).collect(Collectors.toList());
 System.out.println(JSON.toJSONString(names));
 ```
-####Count
+#### Count
 count是一个流的终点方法，用来统计
 ```java
 List<Person> persons = Lists.newArrayList(new Person("张三", 20), new Person("赵六", 20), new Person("李四", 22), new Person("王五", 18));
@@ -150,7 +150,7 @@ List<Person> persons = Lists.newArrayList(new Person("张三", 20), new Person("
 long count = persons.stream().map(Person::getName).count();
 ```
 
-####Collect
+#### Collect
 collect方法也是一个流的终点方法，可收集最终的结果。
 
 ```java
@@ -191,7 +191,7 @@ Map<Integer, Integer> groupCount = persons.stream().collect(Collectors.groupingB
 System.out.println(JSON.toJSONString(groupCount));
 ```
 
-####Find
+#### Find
 find结合filter使用也是很常见的
 ```java
 List<Person> persons = Lists.newArrayList(new Person("张三", 20), new Person("赵六", 20), new Person("李四", 22), new Person("王五", 18));
@@ -237,7 +237,7 @@ map=>王五
 
 更多参考：http://colobu.com/2014/11/18/Java-8-Stream/
 
-###顺序流与并行流
+### 顺序流与并行流
 每个Stream都有两种模式：顺序执行和并行执行。
 **顺序流**
 ```java
@@ -270,7 +270,7 @@ persons.parallelStream().forEach(System.out::print);
 ![Java8 Stream API 流程](images/java8-stream.png)
 
 ---
-##Base64
+## Base64
 Java一直缺少BASE64编码 API，以至于通常在项目开发中会选用第三方的API实现。但是，Java 8实现了BASE64编解码API，它包含到java.util包。
 
 java.util.Base64工具类提供了一套静态方法获取下面三种BASE64编解码器
@@ -304,7 +304,7 @@ Base64.getUrlEncoder().encodeToString(text.getBytes(StandardCharsets.UTF_8))
 参考：http://my.oschina.net/benhaile/blog/267738
 
 ---
-##JVM消除永久代
+## JVM消除永久代
 Java8彻底删除了永久代，取而代之的是“元空间”
 
 - 它是本地堆内存中的一部分
@@ -318,15 +318,15 @@ G1垃圾回收器优化
 http://ifeve.com/java-garbage-first/
 
 ---
-##时间API改进
+## 时间API改进
 鉴于大家对joda-time使用的比较熟悉了，新的时间API自行查阅
 
 http://ifeve.com/20-examples-of-date-and-time-api-from-java8/
 
-##并发的增强
+## 并发的增强
 http://ifeve.com/java-se-8-concurrent-tool-enhance/
 
-##参考资料
+## 参考资料
 Java8特性
 http://ifeve.com/java-8-features-tutorial/
 
